@@ -26,7 +26,6 @@ const RegisterPage = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post('/api/register', body)
-      console.log(data)
       router.push('/auth/login')
     } catch (error) {
       console.log(error)
@@ -34,7 +33,7 @@ const RegisterPage = () => {
       setIsLoading(false);
     }
   }
-  
+
   return (
     <section className='grid h-[calc(100vh_-_56px)] place-items-center'>
       <form
