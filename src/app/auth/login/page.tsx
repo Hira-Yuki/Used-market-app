@@ -36,7 +36,7 @@ const LoginPage = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col justify-center gap-4 min-w-[350px]'>
-        <h1 className='text-2xl'>Login</h1>
+        <h1 className='text-2xl'>Sign In</h1>
         <Input
           id="email"
           label="Email"
@@ -55,7 +55,7 @@ const LoginPage = () => {
           required
         />
         <Button
-          label='Register'
+          label='Sign In'
         />
         <div>
           <p className='text-gray-400'>

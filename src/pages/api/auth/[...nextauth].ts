@@ -1,11 +1,10 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import { PrismaClient } from "@prisma/client"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "@/libs/prismadb"
 
-
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -45,8 +44,8 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt"
   },
   jwt: {
-    secret:process.env.JWT_SECRET,
-    maxAge: 30*24*60*60 // 30 days
+    secret: process.env.JWT_SECRET,
+    maxAge: 30 * 24 * 60 * 60 // 30 days
   },
   callbacks: {
     async jwt({ token, user }) {
