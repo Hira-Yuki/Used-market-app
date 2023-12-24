@@ -27,6 +27,7 @@ const Input: React.FC<InputProps> = ({ id, label, type = "text", disabled, forma
           p-4 
           pt-6 
           font-light 
+          border-2
           bg-white 
           rounded-md 
           outline-none 
@@ -40,11 +41,11 @@ const Input: React.FC<InputProps> = ({ id, label, type = "text", disabled, forma
       />
       <label
         className={`
-          absolete
+          absolute
           text-md
           duration-150
           transform
-          -translate-y3
+          -translate-y-3
           top-5
           z-10
           origin-[0]
@@ -55,7 +56,9 @@ const Input: React.FC<InputProps> = ({ id, label, type = "text", disabled, forma
           peear-focus:-translate-y-4
           ${errors[id] ? "text-rose-500" : "text-zinc-400"}
         `}
-      />
+      >
+        {label}
+      </label>
     </div>
   )
 }
