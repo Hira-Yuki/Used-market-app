@@ -7,6 +7,7 @@ import ImageUpload from '@/app/components/ImageUpload'
 import Input from '@/app/components/Input'
 import { categories } from '@/app/components/categories/Categories'
 import CategoryInput from '@/app/components/categories/CategoryInput'
+import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
@@ -19,7 +20,7 @@ const ProductUploadPage = () => {
       discription: "",
       category: "",
       latitude: 33.5563,
-      logitude: 126.79581,
+      longitude: 126.79581,
       imageSrc: "",
       price: 1
     }
@@ -28,6 +29,14 @@ const ProductUploadPage = () => {
 
   const imageSrc = watch('imageSrc')
   const category = watch('category')
+
+  const latitude = watch('latitude')
+  const longitude = watch('longitude')
+
+  // 클라이언트 사이드에서 랜더링하기 위해 다이나믹을 이용해서 임포트
+  const KakaoMap = dynamic(() => import('../../components/KakaoMap'), {
+    ssr: false
+  })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
@@ -82,20 +91,21 @@ const ProductUploadPage = () => {
           <hr />
           <div className='grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto'>
             {/* 카테고리 영역 */}
-            {categories.map((item)=> (
+            {categories.map((item) => (
               <div key={item.label} className='col-span-1'>
-                <CategoryInput 
-                  onClick={(category)=> setCustomValue("category", category)}
+                <CategoryInput
+                  onClick={(category) => setCustomValue("category", category)}
                   selected={category === item.path}
                   label={item.label}
                   icon={item.icon}
                   path={item.path}
                 />
               </div>
-              ))}
+            ))}
           </div>
           <hr />
           {/* 지도 영역 */}
+          <KakaoMap setCustomValue={setCustomValue} latitude={latitude} longitude={longitude}/>
 
           <Button label='상품 생성하기' />
         </form>
