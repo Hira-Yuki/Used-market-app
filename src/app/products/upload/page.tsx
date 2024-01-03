@@ -7,17 +7,20 @@ import ImageUpload from '@/app/components/ImageUpload'
 import Input from '@/app/components/Input'
 import { categories } from '@/app/components/categories/Categories'
 import CategoryInput from '@/app/components/categories/CategoryInput'
+import axios from 'axios'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 const ProductUploadPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
 
   const { register, handleSubmit, setValue, watch, formState: { errors, }, reset } = useForm<FieldValues>({
     defaultValues: {
       title: "",
-      discription: "",
+      description: "",
       category: "",
       latitude: 33.5563,
       longitude: 126.79581,
@@ -39,7 +42,18 @@ const ProductUploadPage = () => {
   })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
 
+    axios.post("/api/products", data)
+      .then(response => {
+        router.push(`/products/${response.data.id}`)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const setCustomValue = (id: string, value: any) => {
@@ -71,8 +85,8 @@ const ProductUploadPage = () => {
           />
           <hr />
           <Input
-            id="discription"
-            label='Discription'
+            id="description"
+            label='Description'
             disabled={isLoading}
             register={register}
             errors={errors}
@@ -105,7 +119,7 @@ const ProductUploadPage = () => {
           </div>
           <hr />
           {/* 지도 영역 */}
-          <KakaoMap setCustomValue={setCustomValue} latitude={latitude} longitude={longitude}/>
+          <KakaoMap setCustomValue={setCustomValue} latitude={latitude} longitude={longitude} />
 
           <Button label='상품 생성하기' />
         </form>
