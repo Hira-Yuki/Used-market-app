@@ -3,6 +3,7 @@ import { Product, User } from '@prisma/client'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import HeartButton from './HeartButton';
 
 interface ProductCardProps {
   data: Product;
@@ -24,6 +25,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ data, currentUser }) => {
             className='object-cover w-full h-full transition group-hover:scale-110'
             alt='product'
           />
+          <div className='absolute top-3 right-3'>
+            <HeartButton
+              productId={data.id}
+              currentUser={currentUser}
+            />
+          </div>
         </div>
 
         <div className='text-lg font-semibold'>

@@ -15,7 +15,6 @@ export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams)
   const currentUser = await getCurrentUser()
 
-  console.log("products?????? ", products)
   return (
     <Container>
       { /* Category */}
