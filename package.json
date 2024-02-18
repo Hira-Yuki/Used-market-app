@@ -15,6 +15,7 @@
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.10",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "next-cloudinary": "^5.16.0",
