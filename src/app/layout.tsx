@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from './components/Navbar'
 import getCurrentUser from './actions/getCurrentUser'
 import Script from 'next/script'
+import ToastProvider from './components/ToastProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
       <body className={inter.className}>
 
         <Navbar currentUser={currentUser} />
+        <ToastProvider />
         {children}
         <Script
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e00829cfaf799b6199b24d27d4802&libraries=services,clusterer&autoload=false"
